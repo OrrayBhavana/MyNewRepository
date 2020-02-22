@@ -1,0 +1,55 @@
+package bhavana;
+
+public class PersonMain {
+
+	public static void main(String[] args) {
+		
+		PersonDetails p=new PersonDetails("Abhishek","Bichala",'M');
+		p.setNumber(9999999999L);
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p.getFirstName());
+		System.out.println("lastname :"+p.getLastName());
+		System.out.println("gender :"+p.getGender());
+		System.out.println("Number :"+p.getNumber());
+		
+		PersonDetails p1=new PersonDetails("Bhavana","Reddy",'F');
+		p1.setNumber(9999999999L);
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p1.getFirstName());
+		System.out.println("lastname :"+p1.getLastName());
+		System.out.println("gender :"+p1.getGender());
+		System.out.println("Number :"+p1.getNumber());
+		
+		PersonDetails p2=new PersonDetails("Bhanu","Reddy",'M');
+		p2.setNumber(9999999999L);
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p2.getFirstName());
+		System.out.println("lastname :"+p2.getLastName());
+		System.out.println("gender :"+p2.getGender());
+		System.out.println("Number :"+p1.getNumber());
+	
+	}
+}
+...
+PersonDetails Details
+_______________
+Firstname :Abhishek
+lastname :Bichala
+gender :M
+Number :9999999999
+PersonDetails Details
+_______________
+Firstname :Bhavana
+lastname :Reddy
+gender :F
+Number :9999999999
+PersonDetails Details
+_______________
+Firstname :Bhanu
+lastname :Reddy
+gender :M
+Number :9999999999
+

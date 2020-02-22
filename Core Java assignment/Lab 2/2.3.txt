@@ -1,0 +1,44 @@
+package bhavana;
+
+public class PersonMain {
+
+	public static void main(String[] args) {
+		
+		PersonDetails p=new PersonDetails("Abhishek","Bichala",'M');
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p.getFirstName());
+		System.out.println("lastname :"+p.getLastName());
+		System.out.println("gender :"+p.getGender());
+		
+		PersonDetails p1=new PersonDetails("Bhavana","Reddy",'F');
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p1.getFirstName());
+		System.out.println("lastname :"+p1.getLastName());
+		System.out.println("gender :"+p1.getGender());
+		PersonDetails p2=new PersonDetails("Bhanu","Reddy",'M');
+		System.out.println("PersonDetails Details");
+		System.out.println("_______________");
+		System.out.println("Firstname :"+p2.getFirstName());
+		System.out.println("lastname :"+p2.getLastName());
+		System.out.println("gender :"+p2.getGender());
+	
+	}
+}
+...
+PersonDetails Details
+_______________
+Firstname :Abhishek
+lastname :Bichala
+gender :M
+PersonDetails Details
+_______________
+Firstname :Bhavana
+lastname :Reddy
+gender :F
+PersonDetails Details
+_______________
+Firstname :Bhanu
+lastname :Reddy
+gender :M
