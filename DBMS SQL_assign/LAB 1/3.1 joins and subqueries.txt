@@ -1,0 +1,204 @@
+3.1: Joins and Subqueries3.1:
+
+1.Write a query which displays Staff Name, Department Code, Department Name, and Salary for all staff who earns more than 20000.
+SQL> select s.staff_name,d.dept_code,d.dept_name,s.staff_sal from Staff_Master s,Department_Master d where s.Dept_code=d.dept_code and s.staff_sal>20000;
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+Bhavana                                                    10
+Producer                                           5647734.38
+
+Bhanu                                                      10
+Producer                                           5647734.38
+
+Bhavana                                                    10
+Producer                                           5647734.38
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+Bhanu                                                      10
+Producer                                           5647734.38
+
+Bhanu                                                      10
+Producer                                           5647734.38
+
+Bhavana                                                    10
+Producer                                           5647734.38
+
+
+STAFF_NAME                                          DEPT_CODE
+-------------------------------------------------- ----------
+DEPT_NAME                                           STAFF_SAL
+-------------------------------------------------- ----------
+Bhavana                                                    10
+Producer                                           3464733.79
+
+
+7 rows selected.
+2.Display Staff Code, Staff Name, Department Name, and his manager’s number and name. Label the columns Staff#, Staff, Mgr#, Manager.
+ 
+SQL> SELECT a.staff_code as Staff#,a.Staff_Name as staff,d.Dept_name,b.Mgr_code as Mgr#,b.Mgr_name as Manager from Staff_Master a,Department_Master d,Manager_Master b where a.Dept_code=d.dept_code AND b.Mgr_code=a.Mgr_code;
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+        12 Bhavana
+Producer                                              9384839
+Bhanu
+
+     26362 Bhavana
+Producer                                                   34
+Bhavana
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+
+     26362 Bhavana
+Producer                                                   34
+Abhi
+
+     26360 Bhanu
+Producer                                                   34
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+Bhavana
+
+     26360 Bhanu
+Producer                                                   34
+Abhi
+
+     26360 Bhanu
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+Producer                                                   34
+Bhavana
+
+     26360 Bhanu
+Producer                                                   34
+Abhi
+
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+     26363 Bhavana
+Producer                                                   34
+Bhavana
+
+     26363 Bhavana
+Producer                                                   34
+Abhi
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+
+     26363 Bhanu
+Producer                                                   34
+Bhavana
+
+     26363 Bhanu
+Producer                                                   34
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+Abhi
+
+     26363 Bhavana
+Producer                                                   34
+Bhavana
+
+     26363 Bhavana
+
+    STAFF# STAFF
+---------- --------------------------------------------------
+DEPT_NAME                                                MGR#
+-------------------------------------------------- ----------
+MANAGER
+--------------------------------------------------
+Producer                                                   34
+Abhi
+
+
+13 rows selected.
+
+3.Create a query that will display Student Code, Student Name, Book Code, and Book Name for all students whose expected book return date is today.
+
+SQL> select s.Student_code,s.Student_Name,b.Book_code,b.Book_name from Student_Master s,Book_Master b,Book_Transactions bt where s.Student_code=bt.Student_code and b.Book_Code=bt.Book_code and book_expected_return_date=(Sysdate);
+
+no rows selected
+
+4.Create a query that will display Staff Code, Staff Name, Department Name, Designation name, Book Code, Book Name, and Issue Date for only those staff who have taken any book in last 30 days. . If required, make changes to the table to create such a scenario.
+SQL> select s.Staff_code,s.Staff_name,d.Dept_name,de.Design_name,b.Book_code,b.book_name,bt.book_issue_date from Staff_Master s,Department_MAster d,Designation_Master de,Book_Transactions bt,Book_Master b where s.Dept_code=d.Dept_code and s.Design_code=de.Design_code and b.Book_code=bt.Book_code and bt.staff_code=s.staff_code and (MONTHS_BETWEEN(SYSDATE,Book_issue_date)<1);
+
+no rows selected
+
+
+6.List Staff Code, Staff Name, and Salary for those who are getting less than the average salary of organization.
+
+SQL> select ename,empid from emp_22 where sal<=(select avg(sal) from emp_22);
+
+ENAME           EMPID
+---------- ----------
+Bhavana          7589
+Abhi             7989
+Bhanu            7990
+Bhanu            5690
+Bhanu            5780
+
+7.Display Author Name, Book Name for those authors who wrote more than one book.
+SQL> select book_name,book_pub_author from book_Master where book_pub_author=(select book_pub_author from book_Master GROUP BY book_pub_author HAVING count(book_pub_author)>1);
+
+BOOK_NAME
+--------------------------------------------------
+BOOK_PUB_AUTHOR
+--------------------------------------------------
+Java
+Abhi
+
+Java
+Abhi
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+8.Display Staff Code, Staff Name, and Department Name for those who have taken more than one book. 
+
+
+SQL> select s.staff_code, s.staff_name, d.dept_name from staff_master s, department_master d where s.dept_code=d.dept_code and s.staff_code=(select staff_code from book_transactions group by staff_code having count(staff_code)>1);
+
+STAFF_CODE STAFF_NAME
+---------- --------------------------------------------------
+DEPT_NAME
+--------------------------------------------------
+         1 Bhavana
+software
