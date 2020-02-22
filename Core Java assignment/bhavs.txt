@@ -1,7 +1,0 @@
-create or replace procedure empproc(
-in name varchar2(12),
-in fathername varchar2(12),
-in password varchar2(12))
-begin 
-insert into emp values(name,fathername,password);
-end;
