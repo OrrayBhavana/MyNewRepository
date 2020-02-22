@@ -1,0 +1,41 @@
+package jdbcPack;
+import java.io.FileReader;
+10.1
+
+
+
+import java.io.IOException;
+import java.util.Properties;
+public class PersonProp {
+public static void main(String[] args) throws IOException{
+
+	Properties pp=new Properties();
+
+	FileReader fr=new FileReader("C:\\Users\\Pradeep Reddy\\workspace\\JDBCProject1\\src\\jdbcPack\\PersonProps.properties");
+
+	System.out.println("After Loading");
+
+	pp.load(fr);
+
+	System.out.println(pp);
+
+	System.out.println("using getProperty() method");
+
+	System.out.println(pp.getProperty("name"));
+
+	System.out.println(pp.getProperty("rollno"));
+
+	fr.close();
+
+	 }
+
+}
+
+
+Output:
+---------
+After Loading
+{name=Bhavana, rollno=16911A04M4}
+using getProperty() method
+Bhavana
+16911A04M4
