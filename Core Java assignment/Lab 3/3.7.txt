@@ -1,0 +1,23 @@
+package bhavana;
+import java.util.Scanner;
+public  class Person {
+public String getFullName(String firstName,String lastname){
+		String fullname=firstName+lastname;
+		return fullname;
+		
+	}
+	
+
+	public static void main(String[] args) {
+		//Person p=new Person("Bhavana","Reddy",'F');
+
+		Scanner sc=new Scanner(System.in);
+		Person P=new Person();
+		String firstName=sc.nextLine();
+		String lastName=sc.nextLine();
+	   String result=P.getFullName(firstName,lastName);
+	   System.out.println(result);
+        sc.close();
+	}
+
+}

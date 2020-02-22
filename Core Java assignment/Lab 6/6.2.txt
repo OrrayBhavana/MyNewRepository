@@ -1,0 +1,35 @@
+package bhavana;
+
+class AgeException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String str;
+	AgeException(String str){
+		this.str = str;
+	}
+	public String toString() {
+		return "Exception : "+this.str;
+	}
+}
+
+
+
+public class CheckAge {
+
+	public static void main(String[] args) {
+		Person person1 = new Person("Abhi",17);
+		try {
+		if(person1.age<18) {
+			throw new AgeException("Age should be greater than 18");
+		}
+		}
+		catch(AgeException e) {
+			System.out.println(e.toString());
+		}
+	}
+	
+}
+...
+Exception : Age should be greater than 18

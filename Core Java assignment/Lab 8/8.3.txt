@@ -1,0 +1,68 @@
+package com.cg.esi.pl;
+
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Scanner;
+
+import com.cg.esi.bean.Employee;
+import com.cg.esi.service.GetEmployeeSerivices;
+import java.io.*;
+
+public class UserInputsAndOutputs {
+
+	public static void main(String[] args) throws IOException {
+		//FileInputStream in=new FileInputStream("C:\\Users\\Pradeep Reddy\\eclipse-workspace\\project1\\src\\com\\cg\\esi\\pl\\Details.txt");
+		//FileOutputStream out = new FileOutputStream("C:\\Users\\Pradeep Reddy\\eclipse-workspace\\project1\\src\\com\\cg\\esi\\pl\\Details.txt");
+		BufferedWriter out = new BufferedWriter(new FileWriter("C:\\Users\\Pradeep Reddy\\eclipse-workspace\\project1\\src\\com\\cg\\esi\\pl\\Details.txt", true));
+		Scanner sc = new Scanner(System.in);
+		int id;
+		String name,designation,insuranceScheme;
+		double salary;
+		id = sc.nextInt();
+		name = sc.next();
+		salary = sc.nextDouble();
+		designation = sc.next();
+		Employee e1 = new Employee(id,name,salary,designation);
+		GetEmployeeSerivices get1 = new GetEmployeeSerivices();
+		insuranceScheme = get1.getScheme(e1);
+		e1.setInsurenceScheme(insuranceScheme);
+		out.write(String.valueOf(id));
+		out.write(name);
+		out.write(String.valueOf(salary));
+		out.write(designation);
+		out.write(insuranceScheme);
+		out.close();
+		BufferedReader in = new BufferedReader(new FileReader("C:\\Users\\Pradeep Reddy\\eclipse-workspace\\project1\\src\\com\\cg\\esi\\pl\\Details.txt")); 
+		
+		 String mystring; 
+         while ((mystring = in.readLine()) != null) { 
+             System.out.println(mystring); 
+         } 
+		
+		
+		
+		/*
+		 * System.out.println("Employee Details:\n");
+		 * System.out.println("ID : "+e1.getId());
+		 * System.out.println("\nNAME : "+e1.getName());
+		 * System.out.println("\nSALARY : "+e1.getSalary());
+		 * System.out.println("\nDESIGNATION : "+e1.getDesignation());
+		 * System.out.println("\nINSURENCE SCHEME : "+e1.getInsurenceScheme());
+		 */
+	}
+
+}
+
+
+
+Output:
+12
+
+bhavs
+60000
+Manager
+
+12bhavs60000.0ManagerScheme A

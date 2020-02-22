@@ -1,0 +1,133 @@
+
+
+Employee.java
+
+package com.cg.esi.bean;
+
+public class Employee {
+
+	int id;
+	String name;
+	public double salary;
+	public String designation;
+	public String insurenceScheme;
+	public Employee(int id,String name,double salary,String designation){
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.designation = designation;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public String getInsurenceScheme() {
+		return insurenceScheme;
+	}
+	public void setInsurenceScheme(String insurenceScheme) {
+		this.insurenceScheme = insurenceScheme;
+	}
+}
+...
+GetEmployeeServices.java
+
+package com.cg.esi.service;
+import com.cg.esi.bean.Employee;
+
+interface EmployeeService {
+	 String getScheme(Employee e);
+}
+public class GetEmployeeSerivices implements EmployeeService {
+
+	@Override
+	public String getScheme(Employee e) {
+		if((e.salary>5000 && e.salary<20000) && e.designation.equals("System Associate")) {
+			return "Scheme C";
+		}
+		else if((e.salary>=20000 && e.salary<40000) && e.designation.equals("Programmer")) {
+			return "Scheme B";
+		}
+		else if(e.salary>=40000 && e.designation.equals("Manager")) {
+			return "Scheme A";
+		}
+		else if(e.salary<5000 && e.designation.equals("Clerk")) {
+		return null;
+	    }
+		return null;
+	}
+	
+}
+
+
+UserInputsAndOutputs.java
+...
+package com.cg.esi.pl;
+
+import java.util.Scanner;
+
+import com.cg.esi.bean.Employee;
+import com.cg.esi.service.GetEmployeeSerivices;
+
+
+public class UserInputsAndOutputs {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int id;
+		String name,designation,insuranceScheme;
+		double salary;
+		id = sc.nextInt();
+		name = sc.next();
+		salary = sc.nextDouble();
+		designation = sc.next();
+		Employee e1 = new Employee(id,name,salary,designation);
+		GetEmployeeSerivices get1 = new GetEmployeeSerivices();
+		insuranceScheme = get1.getScheme(e1);
+		e1.setInsurenceScheme(insuranceScheme);
+		System.out.println("Employee Details:\n");
+		System.out.println("ID : "+e1.getId());
+		System.out.println("\nNAME : "+e1.getName());
+		System.out.println("\nSALARY : "+e1.getSalary());
+		System.out.println("\nDESIGNATION : "+e1.getDesignation());
+		System.out.println("\nINSURENCE SCHEME : "+e1.getInsurenceScheme());
+	}
+
+}
+.............................................................................
+OUTPUT:
+
+1
+Abhi
+40000
+Manager
+Employee Details:
+
+ID : 1
+
+NAME : Abhi
+
+SALARY : 40000.0
+
+DESIGNATION : Manager
+
+INSURENCE SCHEME : Scheme A

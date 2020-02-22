@@ -1,0 +1,35 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SortProductNames {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int numberOfProducts = sc.nextInt();
+		
+		String productNames[]= new String[numberOfProducts];
+		
+		for(int i=0;i<numberOfProducts;i++) {
+			productNames[i] = sc.next();
+		}
+		
+		Arrays.sort(productNames);
+		for(String name:productNames) {
+			System.out.println(name);
+		}
+		//for(int i=0;i<numberOfProducts;i++){
+		//	System.out.println(productNames[i]);
+		//}
+
+	}
+
+}
+...
+3
+Bhavana
+Abhi
+Bhavana Reddy
+Abhi
+Bhavana
+Bhavana

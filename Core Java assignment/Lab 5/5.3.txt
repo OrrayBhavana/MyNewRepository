@@ -1,0 +1,40 @@
+package bhavana;
+
+public abstract class AccountAbstract {
+
+	static long count=0;
+	protected long accnum;
+	protected double balance;
+	Person accHolder;
+	//Getter Setter methods
+	public static long getCount() {
+		return count;
+	}
+	public static void setCount(long count) {
+		Account.count = count;
+	}
+	public Person getAccHolder() {
+		return accHolder;
+	}
+	public void setAccHolder(Person accHolder) {
+		this.accHolder = accHolder;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	//Actual Implementation Methods
+	void deposit(double d) {
+		this.balance=this.balance+d;
+	}
+	abstract void withdraw(double d);
+	double getBalance() {
+		return this.balance;
+	}
+	String getBalanceInString(double d) {
+		return toString(d);
+	}
+	String toString(double d) {
+		return d+"";
+	}
+	
+}

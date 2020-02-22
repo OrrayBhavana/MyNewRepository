@@ -1,0 +1,28 @@
+package FilesConcept;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class ReverseContent {
+
+	public static void main(String[] args) throws IOException {
+		FileInputStream in = new FileInputStream("C:\\Users\\Pradeep Reddy\\workspace\\Layered Architecture\\src\\FilesConcept\\1.txt");
+		FileOutputStream out = new FileOutputStream("C:\\Users\\Pradeep Reddy\\workspace\\Layered Architecture\\src\\FilesConcept\\2.txt");
+		int c = 0,i=0,len,j;
+		int[] arr = new int[1000];
+		while((c=in.read())!=-1){
+			arr[i++] = c;
+		}
+		len = i;
+		for(i=0,j=len-1;i<len;i++,j--){
+			out.write(arr[j]);
+		}
+
+	}
+
+}
+
+Text1--Hello World!
+text2-!dlroW olleH

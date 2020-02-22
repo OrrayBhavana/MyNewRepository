@@ -1,0 +1,56 @@
+9.1
+package jdbcPack;
+
+public class Person {
+	private String firstName;
+	private String lastName;
+	
+	public Person(String fname, String lname)
+	{
+		if(fname==null&&lname==null)
+		{
+			throw new IllegalArgumentException("Both Names Cannot be NULL");
+		}
+		this.firstName=fname;
+		this.lastName=lname;
+	}
+	public String getFullname()
+	{
+		String first=(this.firstName!=null)?this.firstName:"?";
+		String last=(this.lastName!=null)?this.lastName:"?";
+		return first+" "+last;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+}
+package jdbcPack;
+import org.junit.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class TestPerson2 {
+
+	@Test
+	public void testGetFullName()
+	{
+		System.out.println("From TestPerson2");
+		Person per=new Person("Robert","King");
+		assertEquals("Robert King",per.getFullname());
+	}
+	@Test(expected= IllegalArgumentException.class)
+	public void testNullslnName()
+	{
+		System.out.println("from TestPerson2 testing exceptions");
+		Person per1=new Person(null,null);
+	}
+	
+
+}
+Output:
+From TestPerson2
+from TestPerson2 testing exceptions

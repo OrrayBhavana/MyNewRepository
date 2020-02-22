@@ -1,0 +1,29 @@
+package com.cg.esi.exception;
+
+import com.cg.esi.bean.Employee;
+
+class ExceptionSalary extends Exception{
+	String str;
+	ExceptionSalary(String str){
+		this.str = str;
+	}
+	public String toString() {
+		return "Exception : "+str;
+	}
+}
+
+public class EmployeeException {
+	public static void main(String[] args) {
+		Employee e1 = new Employee(1,"Abhi",2000,"Manager");
+		try {
+		if(e1.getSalary()<3000) {
+			throw new ExceptionSalary("Salary less than 3000");
+		}
+		}
+		catch(ExceptionSalary e) {
+			System.out.println(e.toString());
+		}
+	}
+}
+...
+Exception : Salary less than 3000

@@ -1,0 +1,34 @@
+package bhavana;
+public class Account {
+	static long count=0;
+	private long accnum;
+	private double balance;
+	Person accHolder;
+	Account(long accnum,double balance,Person p){
+		this.accnum=accnum;
+		this.balance=balance;
+		this.accHolder = p;
+	}
+	void deposit(double d) {
+		this.balance=this.balance+d;
+	}
+	void withdraw(double d) {
+		this.balance = this.balance-d;
+	}
+	double getBalance() {
+		return this.balance;
+	}
+	String getBalanceInString(double d) {
+		return toString(d);
+	}
+	String toString(double d) {
+		return d+"";
+	}
+	public static void main(String[] args) {
+		Account smith = new Account(count++,2000.0,new Person("smith",22.0F));
+		Account kathy = new Account(count++,3000.0,new Person("Kathy",22.0F));
+		smith.deposit(2000);
+		kathy.withdraw(2000);
+		System.out.println("Smith:"+smith.getBalance()+"\nKathy:"+kathy.getBalance());
+	}
+}

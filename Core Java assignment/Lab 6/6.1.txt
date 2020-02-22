@@ -1,0 +1,36 @@
+package bhavana;
+
+class BlankException extends Exception{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String str;
+	BlankException(String str){
+		this.str=str;
+	}
+	public String toString() {
+		return "Exception Occured : "+this.str;
+	}
+	
+}
+public class HandleException {
+
+	public static void main(String[] args) {
+		PersonDetails person1 = new PersonDetails();
+		person1.setFirstName("");
+		person1.setLastName("");
+		if(person1.getFirstName().equals("") || person1.getLastName().equals("")) {
+			try {
+				throw new BlankException("Blank");
+			} catch (BlankException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.toString());
+			}
+		}
+
+	}
+
+}
+...
+Exception Occured : Blank

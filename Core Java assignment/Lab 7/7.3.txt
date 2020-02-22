@@ -1,0 +1,59 @@
+package bhavana;
+
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.Set;
+
+import com.cg.esi.bean.Employee;
+
+public class EmployeeHash {
+
+	static HashMap<String,Employee> list1;
+	public static void main(String[] args) {
+		Employee e1 = new Employee(1,"Abhi",50000,"Manager","Scheme A");
+		Employee e2 = new Employee(2,"Bhavs",60000,"System Associate","Scheme B");
+		Employee e3 = new Employee(3,"AbhiBhavs",90000,"Programmer","Scheme C");
+		list1 = new HashMap<String,Employee>();
+		list1.put("Scheme A", e1);
+		list1.put("Scheme B", e2);
+		list1.put("Scheme C", e3);
+		Scanner sc = new Scanner(System.in);
+		String insScheme = sc.next();
+		Set<String> keyss = list1.keySet();
+		for(String scheme : keyss) {
+			if(scheme.equals(insScheme)) {
+				list1.get(insScheme);
+			}
+		}
+		
+	}
+	public void addEmployee(Employee emp)	{
+		if((emp.getSalary()>5000 && emp.getSalary()<20000) && emp.getDesignation().equals("System Associate"))
+			list1.put("Scheme C",emp);
+		else if((emp.getSalary()>=20000 && emp.getSalary()<40000) && emp.getDesignation().equals("Programmer"))
+			list1.put("Scheme B",emp);
+		else if((emp.getSalary()>=40000) && emp.getDesignation().equals("Manager"))
+			list1.put("Scheme A",emp);
+		else if(emp.getSalary()<5000 && emp.getDesignation().equals("Clerk"))
+			list1.put("No Scheme",emp);
+		else
+			System.out.println("Employee is not registered");
+    }
+	public boolean deleteEmployee(int id)	{
+		Employee e;
+		Set<String> keyss = list1.keySet();
+		String temp = null;
+		for(String scheme : keyss) {
+			e = list1.get(scheme);
+			if(e.getId() == id) {
+				temp = scheme;
+				System.out.println("Employee Removed");
+				break;
+			}		
+		}
+		list1.remove(temp);
+		return true;
+	}
+
+
+}

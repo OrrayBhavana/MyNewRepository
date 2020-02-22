@@ -1,0 +1,41 @@
+package FilesConcept;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class EvenNumbers {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		// TODO Auto-generated method stub
+		File f=new File("C:\\Users\\Pradeep Reddy\\workspace\\Layered Architecture\\src\\FilesConcept\\numbers.txt");
+		Scanner sc=new Scanner(f);
+		char[] arr = null ;
+		int temp=0;
+		String str;
+		while(sc.hasNext()){
+			str=sc.nextLine();
+			arr=str.toCharArray();
+		}
+		int len=arr.length;
+		for(int i=0;i<len;i++){
+			if(arr[i]!=','){
+			int num = Integer.parseInt(String.valueOf(arr[i]));
+			if(num%2==0){
+				System.out.println(num);
+			   }	
+		   }
+			
+		}
+	}
+
+}
+
+
+
+Output:
+0
+2
+4
+6
+8

@@ -1,0 +1,87 @@
+package jdbcPack;
+
+public class Date 
+	{
+	int intDay;
+	int intMonth;
+	int intYear;
+
+	Date(int intDay, int intMonth, int intYear)  	{
+		this.intDay = intDay;
+	this.intMonth = intMonth;
+	this.intYear = intYear;
+	}
+	// setter and getter methods
+	 void setDay(int intDay)	
+	{
+		this.intDay = intDay;
+	}
+		int getDay( )		
+	{
+		return  this.intDay;
+	}
+
+	void setMonth(int intMonth)
+	{
+		this.intMonth = intMonth;
+	}
+
+	int getMonth( )
+	{
+		return  this.intMonth;
+	}
+
+	void setYear(int intYear)
+	{
+		this.intYear=intYear;
+	}
+
+
+
+	int getYear( )
+	{
+		return  this.intYear;
+	}
+	public String toString()    
+	{
+		return	"Date is :"+intDay+"/"+intMonth+"/"+intYear;
+	}
+
+
+	} // Date class
+
+
+package jdbcPack;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+public class TestPerson
+{
+@Test
+public void SetDay()
+{
+	System.out.println("from TestPerson");
+	Date dt=new Date(1,12,1999);
+	assertEquals(1,dt.getDay());	
+}
+@Test
+public void SetMonth()
+{
+	System.out.println("from TestPerson");
+	Date dt=new Date(1,12,1999);
+	assertEquals(12,dt.getMonth());	
+}
+@Test
+public void SetYear()
+{
+	System.out.println("from TestPerson");
+	Date dt=new Date(1,12,1999);
+	assertEquals(1999,dt.getYear());	
+}
+}
+
+OUTPUT: -
+from TestPerson
+from TestPerson
+from TestPerson
+

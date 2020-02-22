@@ -1,0 +1,54 @@
+package bhavana;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class A_list{
+
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+  /*   ArrayList<String> ar1=new ArrayList<String>();
+     ar1.add("vicco");
+     ar1.add("lakme");
+     ar1.add("nivea");
+     ar1.add("f&l");
+     ar1.add("ponds");
+     Collections.sort(ar1);
+     System.out.println("Elements after sorting:");
+     for(String object:ar1){
+    System.out.println(object);
+     }*/
+Scanner sc=new Scanner(System.in);
+ArrayList<String> l=new ArrayList<String>();
+System.out.println("Enter no of elements:");
+int n=sc.nextInt();
+String a;
+for(int i=0;i<=n;i++){
+a=sc.nextLine();
+l.add(a);
+}
+System.out.println("Elements of Arraylist are:"+l);
+Collections.sort(l);
+System.out.println("Elements after sorting are:");
+for(String object:l){
+System.out.println(object);
+}
+sc.close();
+}
+
+}
+
+Output
+------------------------
+Enter no of elements:
+3
+Ponds
+nivea
+lakme
+Elements of Arraylist are:[, Ponds, nivea, lakme]
+Elements after sorting are:
+
+Ponds
+lakme
+nivea
