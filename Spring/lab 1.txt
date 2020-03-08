@@ -1,0 +1,370 @@
+Query 1.1:
+package demoPack;
+
+public class Employee {
+	private int employeeId;
+	private String employeeName;
+	private double salary;
+	private String businessUnit;
+	private int age;
+
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public String getBusinessUnit() {
+		return businessUnit;
+	}
+	public void setBusinessUnit(String businessUnit) {
+		this.businessUnit = businessUnit;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+		}
+//Main Function
+
+package demoPack;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+
+
+
+public class Execute {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Resource rs=new FileSystemResource("src/beans.xml");
+		BeanFactory factory = new XmlBeanFactory(rs);
+		Employee e= (Employee)factory.getBean("beanId3");
+		System.out.println("Employee Details are:");
+		System.out.println("-------------------------");
+		System.out.println("Employee ID: "+e.getEmployeeId());
+		System.out.println("Employee Name: "+e.getEmployeeName());
+		System.out.println("Employee Salary: "+e.getSalary());
+		System.out.println("Employee BU: "+e.getBusinessUnit());
+		System.out.println("Employee Age: "+e.getAge());
+
+	}
+
+}
+
+//beans.xml
+   </bean>
+    <bean id="beanId3" class="demoPack.Employee">
+    <property name="employeeId" value="12345"/>
+        <property name="employeeName" value="Harriet"/>
+        <property name="salary" value="40000"/>
+        <property name="businessUnit" value="PES-BU"/>
+        <property name="age" value="30"/>
+    
+    </bean>
+ 
+Output:
+Employee Details are:
+-------------------------
+Employee ID: 12345
+Employee Name: Harriet
+Employee Salary: 40000.0
+Employee BU: PES-BU
+Employee Age: 30
+
+
+1.2
+//Employee
+
+package demoPack;
+
+public class Employee {
+	private int employeeId;
+	private String employeeName;
+	private double salary;
+	private SBU businessUnit;
+
+	
+	public Employee(){
+		super();
+	}
+
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	public SBU getBusinessUnit() {
+		return businessUnit;
+	}
+	public void setBusinessUnit(SBU businessUnit) {
+		this.businessUnit = businessUnit;
+	}
+	public void getBusinessdetails(){
+		System.out.println("eid:"+employeeId+"ename:"+employeeName+"salary:"+salary);
+		System.out.println(businessUnit);
+	}
+
+//SBU class
+
+package demoPack;
+
+public class SBU {
+	private String sbuId;
+	private String sbuName;
+	private String sbuHead;
+	
+	public SBU(){
+		super();
+	}
+	public String getSbuId() {
+		return sbuId;
+	}
+	public void setSbuId(String sbuId) {
+		this.sbuId = sbuId;
+	}
+	public String getSbuName() {
+		return sbuName;
+	}
+	public void setSbuName(String sbuName) {
+		this.sbuName = sbuName;
+	}
+	public String getSbuHead() {
+		return sbuHead;
+	}
+	public void setSbuHead(String sbuHead) {
+		this.sbuHead = sbuHead;
+	}
+	
+	@Override
+	public String toString() {
+		return "SBU [sbuId=" + sbuId + ", sbuName=" + sbuName + ", sbuHead=" + sbuHead + "]";
+	}
+	
+}
+
+//Display
+
+package demoPack;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+
+public class Execute {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Resource rs=new FileSystemResource("src/beans.xml");
+		@SuppressWarnings("deprecation")
+		BeanFactory factory = new XmlBeanFactory(rs);
+		Employee e= (Employee)factory.getBean("beanId3");
+		e.getBusinessdetails();
+}
+
+//beans.xml
+
+  </bean>
+    <bean id="beanId3" class="demoPack.Employee">
+    <property name="employeeId" value="12345"/>
+        <property name="employeeName" value="Harriet"/>
+        <property name="salary" value="40000"/>
+	<property name="businessUnit" ref="beanId4"/>
+    
+    </bean>
+<bean id="beanId4" class="demoPack.SBU">
+    <property name="sbuId" value='PES-BU'/>
+        <property name="sbuHead" value="Kiran Rao"/>
+        <property name="sbuName" value="Product Engineering Services"/>   
+    </bean>
+
+Output:
+
+
+eid:12345ename:Harrietsalary:40000.0
+SBU [sbuId=PES-BU, sbuName=Product Engineering Services, sbuHead=Kiran Rao]
+
+1.3
+
+//Employee Bean
+package demoPack;
+
+public class Employee {
+	private int employeeId;
+	private String employeeName;
+	private double salary;
+	
+
+	public Employee(){
+		super();
+	}
+
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+        @Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", salary=" + salary + "]";
+	}
+}
+
+//SBU Bean
+package demoPack;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class SBU {
+	private String sbuId;
+	private String sbuName;
+	private String sbuHead;
+	private List<Employee> empList;
+	
+	
+
+	public SBU(String sbuId, String sbuName, String sbuHead, List<Employee> empList) {
+		super();
+		this.sbuId = sbuId;
+		this.sbuName = sbuName;
+		this.sbuHead = sbuHead;
+		this.empList = empList;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "SBU [sbuId=" + sbuId + ", sbuName=" + sbuName + ", sbuHead=" + sbuHead + ", empList=" + empList + "]";
+	}
+
+
+
+	public String getSbuId() {
+		return sbuId;
+	}
+
+	public void setSbuId(String sbuId) {
+		this.sbuId = sbuId;
+	}
+
+	public String getSbuName() {
+		return sbuName;
+	}
+
+	public void setSbuName(String sbuName) {
+		this.sbuName = sbuName;
+	}
+
+	public String getSbuHead() {
+		return sbuHead;
+	}
+
+	public void setSbuHead(String sbuHead) {
+		this.sbuHead = sbuHead;
+	}
+
+	
+
+	public List<Employee> getEmpList() {
+		return empList;
+	}
+
+	public void setEmpList(List<Employee> empList) {
+		this.empList = empList;
+	}
+
+	public SBU(){
+		super();
+	}
+	public void display(){
+		System.out.println("sbucode="+sbuId+"sbuName="+sbuName+"sbuHead="+sbuHead);
+		Iterator<Employee> iterator = empList.iterator();
+		
+		  while (iterator.hasNext()) 
+		  { 
+			  System.out.println(iterator.next());
+		  }
+	}
+	
+	}
+//Main Method
+
+package demoPack;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+
+public class Display {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Resource rs=new FileSystemResource("src/beans.xml");
+		@SuppressWarnings("deprecation")
+		BeanFactory factory = new XmlBeanFactory(rs);
+		SBU sbu=(SBU) factory.getBean("beanId4");
+		sbu.display();
+		}
+}
+
+Output:
+sbucode=PES-BUsbuName=Product Engineering ServicessbuHead=Kiran Rao
+Employee [employeeId=12345, employeeName=Harriet, salary=40000.0],
+Employee [employeeId=123456, employeeName=Sunil, salary=60000.0]
+
+
+    
