@@ -1,0 +1,109 @@
+package demopack;
+
+import java.io.Serializable;
+import java.lang.String;
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: Author
+ *
+ */
+@Entity
+
+
+public class Author implements Serializable {
+
+	   
+	@Id
+	private int authorId;   
+	
+	private String firstName;   
+	
+	private String middleName;   
+	
+	private String lastName;   
+	
+	private String phoneNo;
+	
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	public Author() {
+		super();
+	}   
+	public int getAuthorId() {
+		return this.authorId;
+	}
+
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}   
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}   
+	public String getMiddleName() {
+		return this.middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}   
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}   
+	/*public int getPhoneNo() {
+		return this.phoneNo;
+	}
+
+	public void setPhoneNo(int phoneNo) {
+		this.phoneNo = phoneNo;
+	}*/
+   
+}
+--------------------------------------------------------------------------------------------
+SQL QUERY
+-------------------------------------------------------------------------
+SQL> create table author(authorid number(7) primary key,firstName varchar2(50),middleName varchar2(10),lastName varchar2(10),phoneNo number(20));
+
+Table created.
+
+SQL> desc author;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ AUTHORID                                  NOT NULL NUMBER(7)
+ FIRSTNAME                                          VARCHAR2(50)
+ MIDDLENAME                                         VARCHAR2(10)
+ LASTNAME                                           VARCHAR2(10)
+ PHONENO                                            NUMBER(20)
+
+SQL> select * from author;
+
+  AUTHORID FIRSTNAME                                          MIDDLENAME
+---------- -------------------------------------------------- ----------
+LASTNAME      PHONENO
+---------- ----------
+       125 Bhavana                                            Reddy
+Orray      8317589290
+
+       127 Bhanu                                              Reddy
+Orray      9490021560
+
+       126 Abhishek                                           Reddy
+Bichala    9949004765
+
+

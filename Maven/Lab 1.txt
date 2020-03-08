@@ -1,0 +1,200 @@
+Lab 1.	Getting Started With Maven  
+------------------------------------------------------------------------------------------------------------------------------------------------------
+<<TODO>>
+
+Assignment-1:  Create a Banking System project in maven which  maintains  two  kinds  of  accounts  for  customers,  one  called savings account and the other as current account.  The  savings  account  provides  compound  interest  and  withdrawal  facilities  but  no cheque book facility. The current account provides cheque book but no interest. Current account holders should have a minimum balance else they should pay service charges. Build, test and deploy the project into local repository. 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+//Class Account
+
+package com.banking.app;
+public class Account {
+	static long count=0;
+	protected long accnum;
+	protected double balance;
+	protected double no_of_years;
+	
+	Person accHolder;
+	Account(long accnum,double balance,double years,Person p){
+		this.accnum=accnum;
+		this.balance=balance;
+		this.no_of_years=years;
+		this.accHolder = p;
+	}
+	
+	//Getter Setter methods
+	public static long getCount() {
+		return count;
+	}
+	public static void setCount(long count) {
+		Account.count = count;
+	}
+	public Person getAccHolder() {
+		return accHolder;
+	}
+	public void setAccHolder(Person accHolder) {
+		this.accHolder = accHolder;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	public double getNo_of_years() {
+		return no_of_years;
+	}
+
+	public void setNo_of_years(double no_of_years) {
+		this.no_of_years = no_of_years;
+	}
+	//Actual Implementation Methods
+	void deposit(double d) {
+		this.balance=this.balance+d;
+	}
+	void withdraw(double d) {
+		this.balance = this.balance-d;
+	}
+	double getBalance() {
+		return this.balance;
+	}
+	String getBalanceInString(double d) {
+		return toString(d);
+	}
+	String toString(double d) {
+		return d+"";
+	}
+	/*
+	 * public static void main(String[] args) { Account smith = new
+	 * Account(count++,2000.0,new Person("smith",22.0F)); Account kathy = new
+	 * Account(count++,3000.0,new Person("Kathy",22.0F)); smith.deposit(2000);
+	 * kathy.withdraw(2000);
+	 * System.out.println("Smith:"+smith.getBalance()+"\nKathy:"+kathy.getBalance())
+	 * ; }
+	 */
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+//Class Maintenance
+
+package com.banking.app;
+
+
+class SavingsAccount extends Account{
+
+	final double minBalance=1000;
+	SavingsAccount(long accnum, double balance,double no_of_years,Person p) {
+		super(accnum, balance,no_of_years, p);
+	}
+
+	
+	  double compoundInterest() {
+		 
+		  double amount=this.balance*(Math.pow(1+(((double)3)/100), no_of_years));
+		  return amount-this.balance;
+	  }
+	 
+	void withdraw(double d) {
+		if(this.balance>=minBalance)
+		this.balance = this.balance-d;
+		else
+			System.out.println("\nYou doesn't have minimum balance\n");
+	}
+	
+}
+
+class CurrentAccount extends Account{
+
+	Person p;
+	String cheque="";
+	final double overdraftlimit=1000;
+	CurrentAccount(long accnum, double balance,double no_of_years, Person p) {
+		super(accnum, balance,no_of_years, p);
+		this.p=p;
+	}
+	String chequeBook() {
+		String trans = String.valueOf(accnum)+"\n"+String.valueOf(balance)+"\n"+String.valueOf(p.getName())+"\n"+String.valueOf(p.getAge());
+		cheque=cheque+trans;
+		return cheque;
+	}
+	void withdraw(double d) {
+		if(this.balance<this.overdraftlimit)
+		System.out.println("Can't complete this transaction");
+		else
+			this.balance = this.balance-d;
+	}
+	
+}
+
+
+public class Maintenance {
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+//Class Person
+
+package com.banking.app;
+
+public class Person{
+	String name;
+	float age;
+	Person(String name,float age){
+		this.name=name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public float getAge() {
+		return age;
+	}
+
+
+	public void setAge(float age) {
+		this.age = age;
+	}
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+//Class App
+
+package com.banking.app;
+
+public class Person{
+	String name;
+	float age;
+	Person(String name,float age){
+		this.name=name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public float getAge() {
+		return age;
+	}
+
+
+	public void setAge(float age) {
+		this.age = age;
+	}
+}
+----------------------------------------------------------------------------------------
+Output
+----------------------------------------------------------------------------------------
+Compound Interest: 3045.0
+420
+30000.0
+Bhanu
+17.0
+

@@ -1,0 +1,43 @@
+package demopack;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class Client {
+
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("JPAIntro");
+		EntityManager em = factory.createEntityManager();
+		em.getTransaction().begin();
+		
+		Greet greet = new Greet();
+		greet.setMessage("Welcome to JPA!");
+		
+		em.persist(greet);
+		
+		System.out.println("Added greeting to database.");
+
+		em.getTransaction().commit();
+		em.close();
+		factory.close();
+	}
+}
+---------------------------------------------
+SQL QUERY
+---------------------------------------------
+
+SQL> create table greet(messageid Number(5) primary key,message varchar2(25));
+
+Table created.
+
+SQL> desc greet;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MESSAGEID                                 NOT NULL NUMBER(5)
+ MESSAGE                                            VARCHAR2(25)
+
+SQL> select * from greet;
+
+ MESSAGEID MESSAGE
+---------- -------------------------
+         0 Welcome to JPA!

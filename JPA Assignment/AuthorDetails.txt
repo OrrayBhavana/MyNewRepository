@@ -1,0 +1,43 @@
+package demopack;
+
+import javax.persistence.*;
+
+
+public class AuthorDetails {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("JPAIntro");
+		EntityManager em=emf.createEntityManager();
+		System.out.println("Fetching the entity details");
+		em.getTransaction().begin();
+		Author a1=new Author();
+		a1.setAuthorId(125);
+		a1.setFirstName("Bhavana");
+		a1.setLastName("Orray");
+		a1.setMiddleName("Reddy");
+		a1.setPhoneNo("8317589290");
+		Author a2=new Author();
+		a2.setAuthorId(126);
+		a2.setFirstName("Abhishek");
+		a2.setLastName("Bichala");
+		a2.setMiddleName("Reddy");
+		a2.setPhoneNo("9949004765");
+		Author a3=new Author();
+		a3.setAuthorId(127);
+		a3.setFirstName("Bhanu");
+		a3.setLastName("Orray");
+		a3.setMiddleName("Reddy");
+		a3.setPhoneNo("9490021560");
+		em.persist(a1);
+		em.persist(a2);
+		em.persist(a3);
+		em.getTransaction().commit();
+		System.out.println("Transaction Success..");
+		emf.close();
+		
+		
+	}
+
+}
+

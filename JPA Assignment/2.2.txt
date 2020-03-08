@@ -1,0 +1,159 @@
+package demopack1;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+public class Example1 {
+
+@SuppressWarnings("unchecked")
+public static void main(String[] args) {
+// TODO Auto-generated method stub
+EntityManagerFactory emf=Persistence.createEntityManagerFactory("JPAIntro");
+   EntityManager em=emf.createEntityManager();
+  em.getTransaction().begin();
+    Book b5=new Book();
+   b5.setISBN(8790);
+   b5.setTitle("Half Friend");
+   b5.setPrice(7000);
+   Book b6=new Book();
+   b6.setISBN(4523);
+   b6.setTitle("How to Win and Lose");
+   b6.setPrice(8090);
+   em.persist(b5);
+   em.persist(b6);
+   System.out.println("Data inserted");
+  em.getTransaction().commit();
+  
+  
+  Query query= em.createQuery("Select b.title from Book b");
+   List<String> list=query.getResultList();
+   System.out.println("All books in book database: ");
+   for(String s:list){
+    System.out.println(s);
+    
+   }
+Query query1=em.createQuery("Select b.price from Book b where b.price between 500 and 1000");
+List<Integer> list1=query1.getResultList();
+System.out.println("list of books where price between 500 and 1000");
+for(int s:list1){
+System.out.println(s);
+}
+em.close();
+}
+}
+
+
+
+
+
+---------------------------------------------------------------*****Book Entity*****-------------------------------------------------------------------------------------
+package demopack1;
+import java.io.Serializable;
+import java.lang.Double;
+import java.lang.Integer;
+import java.lang.String;
+import java.util.List;
+
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: Book
+ *
+ */
+@Entity
+public class Book implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	   
+	@Id
+	private Integer ISBN;   
+	
+	private String title;   
+	
+	 
+	
+	private int price;
+	
+	public Book() {
+		super();
+	}   
+	public Integer getISBN() {
+		return this.ISBN;
+	}
+
+	public void setISBN(Integer ISBN) {
+		this.ISBN = ISBN;
+	}   
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}   
+	/*public String getAuthor() {
+		return this.author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}  */ 
+	public int getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+   
+}
+
+--------------------------------------------------------------------****Author Entity****-------------------------------------------------------------------------------
+
+package demopack1;
+
+import java.io.Serializable;
+import java.lang.String;
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: Author
+ *
+ */
+@Entity
+
+
+public class AuthorExample implements Serializable {
+
+	   
+	@Id
+	private int id;   
+	
+	private String name;
+	private static final long serialVersionUID = 1L;
+
+	public AuthorExample() {
+		super();
+	}   
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}   
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+   
+}
+
+

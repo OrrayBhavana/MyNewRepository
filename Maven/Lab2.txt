@@ -1,0 +1,275 @@
+Lab 2.	Integrating Maven  with Eclipse
+--------------------------------------------
+ Building an Application
+----------------------------------------------
+Assignment 1: Create a web application which displays product details such as Product Name, Product description, and its price. Users can place orders specifying the quantity of each product. Once the order is placed by customer, the invoice for the current products transaction showing the product name, quantity ordered, price and total amount should be displayed. Build and execute the common life cycle phases for the web application in eclipse.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------**MyProject**-------------------------------------
+//Class Product
+
+
+package com.capgemini.app.MyProject;
+
+public class Product {
+	private String name;
+	private String description;
+	private int quantity;
+	private int price_per_unit=10;
+	public Product(String name, String description,int q) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.quantity=q;
+		
+	}
+	//Getters and Setters
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public float getPrice() {
+		return quantity*price_per_unit;
+	}
+}
+
+----------------------------------------------------------------------------------------------
+//Class App
+
+
+package com.capgemini.app.MyProject;
+
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+       Product p1=new Product("Lakme","Face Cream",3);
+       System.out.println("Product Name:"+p1.getName());
+       System.out.println("Description of Product is:"+p1.getDescription());
+       System.out.println("Price of Product is:"+p1.getPrice());
+       Product p2=new Product("Himalaya","Sunscreen lotion",2);
+       System.out.println("Product Name:"+p2.getName());
+       System.out.println("Description of Product is:"+p2.getDescription());
+       System.out.println("Price of Product is:"+p2.getPrice());
+       System.out.println("Total Price:"+(p1.getPrice()+p2.getPrice()));
+    }
+}
+
+
+---------------------------------------------------------------------------------
+Output:
+------------------------------------------------------------------------
+
+Product Name:Lakme
+Description of Product is:Face Cream
+Price of Product is:30.0
+Product Name:Himalaya
+Description of Product is:Sunscreen lotion
+Price of Product is:20.0
+Total Price:50.0
+------------------------------------------------------------------------------------
+
+-------------------------------------------**Assignment 2**------------------------------------------------------------------------------------
+Use the Assignment 1 in Lab 1, import the Banking system project into eclipse and build the project in eclipse environment.
+
+//Class Account
+
+package com.banking.app;
+public class Account {
+	static long count=0;
+	protected long accnum;
+	protected double balance;
+	protected double no_of_years;
+	
+	Person accHolder;
+	Account(long accnum,double balance,double years,Person p){
+		this.accnum=accnum;
+		this.balance=balance;
+		this.no_of_years=years;
+		this.accHolder = p;
+	}
+	
+	//Getter Setter methods
+	public static long getCount() {
+		return count;
+	}
+	public static void setCount(long count) {
+		Account.count = count;
+	}
+	public Person getAccHolder() {
+		return accHolder;
+	}
+	public void setAccHolder(Person accHolder) {
+		this.accHolder = accHolder;
+	}
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	public double getNo_of_years() {
+		return no_of_years;
+	}
+
+	public void setNo_of_years(double no_of_years) {
+		this.no_of_years = no_of_years;
+	}
+	//Actual Implementation Methods
+	void deposit(double d) {
+		this.balance=this.balance+d;
+	}
+	void withdraw(double d) {
+		this.balance = this.balance-d;
+	}
+	double getBalance() {
+		return this.balance;
+	}
+	String getBalanceInString(double d) {
+		return toString(d);
+	}
+	String toString(double d) {
+		return d+"";
+	}
+	/*
+	 * public static void main(String[] args) { Account smith = new
+	 * Account(count++,2000.0,new Person("smith",22.0F)); Account kathy = new
+	 * Account(count++,3000.0,new Person("Kathy",22.0F)); smith.deposit(2000);
+	 * kathy.withdraw(2000);
+	 * System.out.println("Smith:"+smith.getBalance()+"\nKathy:"+kathy.getBalance())
+	 * ; }
+	 */
+}
+
+
+//Class Maintenance
+
+package com.banking.app;
+
+
+class SavingsAccount extends Account{
+
+	final double minBalance=1000;
+	SavingsAccount(long accnum, double balance,double no_of_years,Person p) {
+		super(accnum, balance,no_of_years, p);
+	}
+
+	
+	  double compoundInterest() {
+		 
+		  double amount=this.balance*(Math.pow(1+(((double)3)/100), no_of_years));
+		  return amount-this.balance;
+	  }
+	 
+	void withdraw(double d) {
+		if(this.balance>=minBalance)
+		this.balance = this.balance-d;
+		else
+			System.out.println("\nYou doesn't have minimum balance\n");
+	}
+	
+}
+
+class CurrentAccount extends Account{
+
+	Person p;
+	String cheque="";
+	final double overdraftlimit=1000;
+	CurrentAccount(long accnum, double balance,double no_of_years, Person p) {
+		super(accnum, balance,no_of_years, p);
+		this.p=p;
+	}
+	String chequeBook() {
+		String trans = String.valueOf(accnum)+"\n"+String.valueOf(balance)+"\n"+String.valueOf(p.getName())+"\n"+String.valueOf(p.getAge());
+		cheque=cheque+trans;
+		return cheque;
+	}
+	void withdraw(double d) {
+		if(this.balance<this.overdraftlimit)
+		System.out.println("Can't complete this transaction");
+		else
+			this.balance = this.balance-d;
+	}
+	
+}
+
+
+public class Maintenance {
+
+}
+
+//Class Person
+
+package com.banking.app;
+
+public class Person{
+	String name;
+	float age;
+	Person(String name,float age){
+		this.name=name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public float getAge() {
+		return age;
+	}
+
+
+	public void setAge(float age) {
+		this.age = age;
+	}
+}
+
+//Class App
+
+package com.banking.app;
+
+public class Person{
+	String name;
+	float age;
+	Person(String name,float age){
+		this.name=name;
+		this.age = age;
+	}
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public float getAge() {
+		return age;
+	}
+
+
+	public void setAge(float age) {
+		this.age = age;
+	}
+}
+----------------------------------------------------------------------------------------
+Output
+----------------------------------------------------------------------------------------
+Compound Interest: 3045.0
+420
+30000.0
+Bhanu
+17.0
+

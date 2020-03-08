@@ -1,0 +1,41 @@
+package demopack;
+
+import java.io.Serializable;
+import java.lang.String;
+import javax.persistence.*;
+
+/**
+ * Entity implementation class for Entity: Greet
+ *
+ */
+@Entity
+
+
+public class Greet implements Serializable {
+
+	   
+	@Id
+	private int messageid;   
+	
+	private String message;
+	private static final long serialVersionUID = 1L;
+
+	public Greet() {
+		super();
+	}   
+	public int getMessageid() {
+		return this.messageid;
+	}
+
+	public void setMessageid(int messageid) {
+		this.messageid = messageid;
+	}   
+	public String getMessage() {
+		return this.message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+   
+}
